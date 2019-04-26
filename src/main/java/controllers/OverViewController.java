@@ -12,6 +12,7 @@ public class OverViewController {
     @RequestMapping(value = "/gotoHome")
     public String gotoHome(){
         logger.debug("进入方法： OverViewController.gotoHome");
+        logger.debug("进入方法： OverViewController.gotoHome");
         return "home";
     }
 }
