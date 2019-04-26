@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PigFavMapper">
+  <resultMap id="BaseResultMap" type="vo.PigFav">
+    <id column="pig_fav_id" jdbcType="INTEGER" property="pigFavId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="fav_id" jdbcType="INTEGER" property="favId" />
+    <result column="fav_name" jdbcType="VARCHAR" property="favName" />
+    <result column="sts" jdbcType="CHAR" property="sts" />
+    <result column="sts_date" jdbcType="TIMESTAMP" property="stsDate" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="pig_id" jdbcType="INTEGER" property="pigId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pig_fav_id, name, type, fav_id, fav_name, sts, sts_date, account, pig_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pig_fav
+    where pig_fav_id = #{pigFavId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pig_fav
+    where pig_fav_id = #{pigFavId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="vo.PigFav">
+    insert into pig_fav (pig_fav_id, name, type, 
+      fav_id, fav_name, sts, sts_date, 
+      account, pig_id)
+    values (#{pigFavId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{favId,jdbcType=INTEGER}, #{favName,jdbcType=VARCHAR}, #{sts,jdbcType=CHAR}, #{stsDate,jdbcType=TIMESTAMP}, 
+      #{account,jdbcType=VARCHAR}, #{pigId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="vo.PigFav">
+    insert into pig_fav
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pigFavId != null">
+        pig_fav_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="favId != null">
+        fav_id,
+      </if>
+      <if test="favName != null">
+        fav_name,
+      </if>
+      <if test="sts != null">
+        sts,
+      </if>
+      <if test="stsDate != null">
+        sts_date,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="pigId != null">
+        pig_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pigFavId != null">
+        #{pigFavId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="favId != null">
+        #{favId,jdbcType=INTEGER},
+      </if>
+      <if test="favName != null">
+        #{favName,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null">
+        #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null">
+        #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="pigId != null">
+        #{pigId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="vo.PigFav">
+    update pig_fav
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="favId != null">
+        fav_id = #{favId,jdbcType=INTEGER},
+      </if>
+      <if test="favName != null">
+        fav_name = #{favName,jdbcType=VARCHAR},
+      </if>
+      <if test="sts != null">
+        sts = #{sts,jdbcType=CHAR},
+      </if>
+      <if test="stsDate != null">
+        sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="pigId != null">
+        pig_id = #{pigId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pig_fav_id = #{pigFavId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="vo.PigFav">
+    update pig_fav
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      fav_id = #{favId,jdbcType=INTEGER},
+      fav_name = #{favName,jdbcType=VARCHAR},
+      sts = #{sts,jdbcType=CHAR},
+      sts_date = #{stsDate,jdbcType=TIMESTAMP},
+      account = #{account,jdbcType=VARCHAR},
+      pig_id = #{pigId,jdbcType=INTEGER}
+    where pig_fav_id = #{pigFavId,jdbcType=INTEGER}
+  </update>
+</mapper>
