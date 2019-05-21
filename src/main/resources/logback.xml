@@ -62,6 +62,7 @@
     <logger name="org.springframework.data.jpa" level="DEBUG" />
     <logger name="ch.qos.logback" level="WARN" />
     <logger name="controllers" level="DEBUG" />
+    <logger name="webpub" level="DEBUG" />
     <logger name="dao" level="DEBUG"></logger>
     <!-- <logger name="com.ibatis" level="DEBUG"></logger> -->
 
