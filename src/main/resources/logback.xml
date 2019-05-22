@@ -64,6 +64,7 @@
     <logger name="controllers" level="DEBUG" />
     <logger name="webpub" level="DEBUG" />
     <logger name="dao" level="DEBUG"></logger>
+    <logger name="services" level="DEBUG"></logger>
     <!-- <logger name="com.ibatis" level="DEBUG"></logger> -->
 
     <root level="INFO">

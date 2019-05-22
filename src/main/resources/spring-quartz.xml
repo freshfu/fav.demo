@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="10"/>
+        <property name="maxPoolSize" value="100"/>
+        <property name="queueCapacity" value="500"/>
+    </bean>
+    <bean id="bizBean" class="services.StudyTask"/>
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="bizBean"/>
+        <property name="targetMethod" value="doBiz"/>
+    </bean>
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail"/>
+        <property name="cronExpression" value="10 0/1 * * * ?"/>
+    </bean>
+    <!-- Cron表达式“10 */1 * * * ?”意为：从10秒开始，每1分钟执行一次。-->
+    <!-- Cron表达式的详细用法
+        字段      允许值                     允许的特殊字符
+        秒        0-59                      - * /
+        分        0-59                      - * /
+        小时      0-23                      - * /
+        日期      1-31                      - * ? / L W C
+        月份      1-12 或者 JAN-DEC          - * /
+        星期      1-7 或者 SUN-SAT           - * ? / L C #
+        年（可选） 留空, 1970-2099            - * /
+
+
+    -->
+
+    <bean id="taskTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail"/>
+        <property name="startDelay" value="10000"/>
+        <property name="repeatInterval" value="60000"/>
+    </bean>
+    <!-- 设置调度 -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+        <property name="taskExecutor" ref="executor"/>
+    </bean>
+</beans>

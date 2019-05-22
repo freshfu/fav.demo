@@ -9,4 +9,5 @@
     <!-- 配置component所在的包，自动加载需要管理的Bean -->
     <context:component-scan base-package="services,dao" />
     <import resource="spring-mybatis.xml" />
+    <import resource="spring-quartz.xml"/>
 </beans>
